@@ -62,7 +62,8 @@ a {
 
 .logo {
   padding: 10px 0 10px 15px;
-  width: 100px;
+  width: 200px;
+  color: #333;
 }
 
 /* nav items CSS start*/

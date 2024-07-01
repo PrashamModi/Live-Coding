@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Shimmer from "../Shimmer"
 import RestaurantCard from "./RestaurantCard";
 import { FaSearch } from "react-icons/fa";
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import useOnline from "../hooks/useOnline";
 import Offline from "./Offline";
 import useResData from "../hooks/useResData";
+import UserContext from "../hooks/useContext";
 
 function filterData(searchText, restaurants) {
   const data = restaurants.filter((restaurant) => {
@@ -21,6 +22,8 @@ const Body = () => {
   const [allRestaurants, FilterRes] = useResData();
   const [filteredRestaurants, setFilteredRestaurants] = useState(null);
   const isOnline = useOnline();
+
+  const {user, setUser} = useContext(UserContext);
 
   if (!isOnline) {
     return <Offline />;
@@ -51,6 +54,10 @@ const Body = () => {
             setFilteredRestaurants(data);
           }}
         >
+          <input type="text" value={user.name} onChange={e => setUser({
+            name : e.target.value,
+            email : "New Email"
+          })}/>
           <FaSearch />
         </button>
       </div>
@@ -58,7 +65,7 @@ const Body = () => {
         {allRestaurants?.length === 0 && FilterRes.length === 0 ? (
           <Shimmer />
         ) : (
-          (filteredRestaurants === null ? FilterRes : filteredRestaurants).map((restaurant) => {
+          (filteredRestaurants === null ? FilterRes : filteredRestaurants)?.map((restaurant) => {
             return (
               <Link
                 to={"/restaurant/" + restaurant?.info?.id}

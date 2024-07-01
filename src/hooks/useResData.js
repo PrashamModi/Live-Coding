@@ -14,12 +14,13 @@ const useResData = () => {
         "https://www.swiggy.com/mapi/homepage/getCards?lat=17.37240&lng=78.43780"
       );
       const json = await data?.json();
+      console.log(json?.data?.success?.cards);
       setFilteredRestaurants(
         json?.data?.success?.cards[3]?.gridWidget?.gridElements?.infoWithStyle
           ?.restaurants
       );
       setAllRestaurants(
-        json?.data?.success?.cards[4]?.gridWidget?.gridElements?.infoWithStyle
+        json?.data?.success?.cards[3]?.gridWidget?.gridElements?.infoWithStyle
           ?.restaurants
       );
     } catch (error) {

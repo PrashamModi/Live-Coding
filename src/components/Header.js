@@ -1,15 +1,13 @@
-import LetHimCook from "../assets/LetHimCook.png";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import UserContext from "../hooks/useContext";
 const Header = () => {
+  const { user } = useContext(UserContext);
+  console.log(user.name);
   return (
     <div className="header">
       <Link to="/">
-        <img
-          src={LetHimCook}
-          alt="Not Loaded"
-          className="logo"
-          style={{ cursor: "pointer" }}
-        />
+        <h1 className="logo">LetHimCook</h1>
       </Link>
       <div className="nav-items">
         <ul>
@@ -22,7 +20,15 @@ const Header = () => {
           <li>
             <Link to="/contact">Contact Us</Link>
           </li>
-          <li>Cart</li>
+          <li>
+            <Link to="/cart">Cart</Link>
+          </li>
+          <li>
+            <Link to="/instamart">Instamart</Link>
+          </li>
+          <h1>
+            {user.name} - {user.email}
+          </h1>
         </ul>
       </div>
     </div>
