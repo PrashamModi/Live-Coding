@@ -7,12 +7,23 @@ import {
 import Shimmer from "../Shimmer";
 import NoFood from "../assets/NoFood.jpg";
 import useRestaurant from "../hooks/useRestaurant"
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 
 const RestaurantMenu = () => {
   // call useParams and get value of restaurant id using object destructuring
   const { id } = useParams();
   
   const {restaurant, menuItems} = useRestaurant(id);
+
+  console.log(menuItems);
+
+  const dispatch = useDispatch();
+
+  const handleClick = (itemName) => {
+    console.log(itemName);
+    dispatch(addItem(itemName))
+  }
 
   return !restaurant ? (
     <Shimmer />
@@ -82,7 +93,7 @@ const RestaurantMenu = () => {
                       alt={item?.name}
                     />
                   }
-                  <button className="add-btn"> ADD +</button>
+                  <button className="add-btn" onClick={() => handleClick(item)}> ADD +</button>
                 </div>
               </div>
             ))}

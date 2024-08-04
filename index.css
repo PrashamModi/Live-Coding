@@ -835,3 +835,20 @@ a {
 }
 
 /* User Offline CSS End */
+
+.cart{
+  margin-top: 200px;
+}
+
+.cartItems{
+  display: flex;
+  /* flex-wrap: wrap; */
+}
+
+.btn{
+  margin: 5;
+  padding: 5;
+  border-radius: 2px;
+  background-color: gray;
+  cursor: pointer;
+}
